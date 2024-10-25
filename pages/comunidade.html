@@ -12,21 +12,22 @@
 <body>
     <div id="header"></div>
     <main>
-       <div class="conteudo-comunidade">
-            <section class="conteudo-comunidade-primario">
-                <div class="conteudo-comunidade-primario-escrito"> <!-- Corrigido aqui -->
-                    <h1 class="conteudo-comunidade-primario-titulo">A Comunidade Helpick</h1>
-                    <p class="conteudo-comunidade-primario-paragrafo">Aqui você pode tirar dúvidas sobre técnicas, equipamentos e outras coisas mais sobre o mundo das cordas.</p>
+       <div class="flex flex-col justify-center align-center">
+            <section class="font-roboto-flex m-10 p-10">
+                <div class="float-left w-[calc(100% - 500px)]">
+                    <h1 class="mb-5">A Comunidade Helpick</h1>
+                    <p class="mb-5">Aqui você pode tirar dúvidas sobre técnicas, equipamentos e outras coisas mais sobre o mundo das cordas.</p>
                 </div>
-                <img src="../assets/guitarrista.svg" alt="guitarrista" class="semi-logo">
+                <img src="../assets/guitarrista.svg" alt="guitarrista" class="h-52 w-[500px] float-right">
             </section>
-            <section class="conteudo-secundario-comunidade">
-                <h2 class="conteudo-secundario-comunidade-titulo">Deixe aqui a sua dúvida:</h2>
-                <input type="text" name="Nome" size="40" class="caixa-texto"/>
-                <button class="conteudo-primario-btn">Colae</button>
+            <section class="font-roboto-flex m-10 p-10 clear-both">
+                <h2 class="mb-5">Deixe aqui o seu e-mail e te mandaremos um conteúdo gratuito para estudo.</h2>
+                <label>
+                    <input type="email" size="40" class="font-roboto-flex px-6 py-3 rounded-lg border-solid"/>
+                </label>
+                <button class="bg-darkslateblue hover:bg-dark-blue px-6 py-3 rounded-lg border-solid border border-blue-500 text-gray-300 hover:pointer">Enviar</button>
             </section>
         </div>
-        <hr />
     </main>
     <div id="footer"></div>
     

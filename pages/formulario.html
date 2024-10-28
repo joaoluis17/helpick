@@ -1,20 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Uma comunidade que irá ajudar novos músicos a evoluírem nos estudos">
+    <link rel="stylesheet" type="text/css" href="../src/style.css"/>
     <link href="../dist/output.css" rel="stylesheet">
-    <title>Teste Tailwind</title>
+    <title>Helpick - A Comunidade</title>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-blue-500 p-4">
-        <div class="flex items-center justify-between">
-            <h1 class="text-white">Título</h1>
-            <nav>
-                <a href="#" class="text-white">Link 1</a>
-                <a href="#" class="text-white">Link 2</a>
-            </nav>
-        </div>
-    </header>
+<body>
+<div id="header"></div>
+<main>
+    <div class="flex flex-col justify-center align-center">
+        <section class="font-roboto-flex m-10 p-10">
+            <div class="float-left w-[calc(100% - 500px)]">
+                <h1 class="mb-5">Entre em contato com a gente</h1>
+                <form action="#" method="post">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone" required>
+
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao" rows="4" required></textarea>
+
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+            <img src="../assets/pedal.svg" alt="guitarrista" class="h-52 w-[500px] float-right">
+        </section>
+    </div>
+</main>
+<div id="footer"></div>
+
+<script src="../js/script.js"></script> <!-- Inclua o script aqui também -->
 </body>
 </html>

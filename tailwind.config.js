@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'assets-color': '#803300', //cor dos assets
         'brown-eyes': '#77493F', //backgroung do header e footer
         'darkslateblue': '#483D8BFF', //background do botão
         'dark-blue': 'rgb(19, 9, 83)', // background hover do botão

@@ -1,21 +1,26 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
-
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
     ],
-
     theme: {
         extend: {
+            colors: {
+                'skin-color': '#DFB09E', //cor do bg dos botões
+                'brown-eyes': '#77493F',
+                'off-white': '#EDE3DB',
+                'darkslateblue': '#483D8BFF',
+                'dark-blue': 'rgb(19, 9, 83)',
+                'gray-300': 'rgba(209, 213, 219, 1)',
+                'blue-500': 'rgba(96, 165, 250, 0.2)',
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                'roboto-flex': ['"Roboto Flex"', 'sans-serif'], // Adiciona a fonte Roboto Flex
+                'tapestry': ['Tapestry', 'cursive'], // Adicionando a fonte 'Tapestry'
             },
         },
     },
-
-    plugins: [forms],
-};
+    plugins: [],
+}

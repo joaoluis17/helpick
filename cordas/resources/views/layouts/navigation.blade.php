@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('assets/palheta.svg') }}" alt="Palheta Helpick" class=" h-12 w-auto" />
+                        <img src="{{ asset('assets/logo-palheta.svg') }}" alt="Palheta Helpick" class=" h-12 w-auto" />
                     </a>
                 </div>
 

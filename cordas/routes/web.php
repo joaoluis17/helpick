@@ -16,9 +16,18 @@ Route::get('/', function () {
 Route::get('/pagina-inicial', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/forum', function () {
     return view('forum');
 })->middleware(['auth', 'verified'])->name('forum');
+
+Route::get('/blog', function () {
+    return view('blog');
+})->middleware(['auth', 'verified'])->name('blog');
+
+Route::get('/produtos', function () {
+    return view('products');
+})->middleware(['auth', 'verified'])->name('products');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('posts', PostController::class)->middleware('auth');
-Route::resource('posts.comments', CommentController::class)->middleware('auth');
+//Route::resource('posts', PostController::class)->middleware('auth');
+//Route::resource('posts.comments', CommentController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

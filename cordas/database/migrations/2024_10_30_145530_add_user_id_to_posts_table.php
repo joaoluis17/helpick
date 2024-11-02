@@ -9,14 +9,21 @@ class AddUserIdToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->after('id'); // Adicione a coluna user_id
+            // Verifique se a coluna já existe antes de adicioná-la
+            if (!Schema::hasColumn('posts', 'user_id')) {
+                $table->unsignedBigInteger('user_id')->nullable(); // Pode ser nullable se não quiser um valor padrão
+                $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            }
         });
     }
 
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('user_id'); // Remove a coluna se a migração for revertida
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
         });
     }
+
 }
+

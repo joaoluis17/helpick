@@ -35,7 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Route::resource('posts', PostController::class)->middleware('auth');
-//Route::resource('posts.comments', CommentController::class)->middleware('auth');
+Route::get('/forum', [PostController::class, 'index'])->name('forum'); // Rota para o fórum
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store'); // Rota para criar posts
+Route::resource('posts', PostController::class);
+
 
 require __DIR__.'/auth.php';

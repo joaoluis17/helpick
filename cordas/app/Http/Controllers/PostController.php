@@ -10,33 +10,31 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all(); // Obtenha todos os posts
-        return view('posts.index', compact('posts')); // Retorne a view com os posts
+        $posts = Post::all();
+        return view('forum', compact('posts'));
     }
 
-    // Mostrar o formulário para criar um novo post
-    public function create()
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        return view('posts.create'); // Retorne a view de criação de post
-    }
-
-    // Armazenar um novo post
-    public function store(Request $request)
-    {
-        // Validação dos dados
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required|string', // A validação garante que 'content' não será nulo
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'user_id' => 'nullable|exists:users,id', // Permite que seja nulo temporariamente
         ]);
 
+        // Cria um novo post
         $post = new Post();
-        $post->title = $request->title; // Dados vindos do formulário
-        $post->content = $request->content; // Dados vindos do formulário
-        $post->user_id = auth()->id(); // Atribui o ID do usuário autenticado
-        $post->save(); // Salva no banco de dados
+        $post->title = $validatedData['title'];
+        $post->content = $validatedData['content'];
 
-        return redirect()->route('posts.index')->with('success', 'Post criado com sucesso!');
+        // Somente atribui user_id se ele estiver presente
+        if (isset($validatedData['user_id'])) {
+            $post->user_id = $validatedData['user_id'];
+        }
+
+        $post->save();
+
+        return redirect()->route('forum')->with('success', 'Post criado com sucesso!');
     }
-
 
 }

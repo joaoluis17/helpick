@@ -14,14 +14,14 @@ class Comment extends Model
         'content',
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 

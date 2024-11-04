@@ -34,7 +34,16 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('forum')->with('success', 'Post criado com sucesso!');
+        return redirect()->route('posts.show', $post->id)->with('success', 'Post criado com sucesso!');
+    }
+
+    public function show($id)
+    {
+        // Busca o post pelo ID junto com os comentários
+        $post = Post::with('comments.user')->findOrFail($id);
+
+        // Retorna a view com o post e seus comentários
+        return view('posts.show', compact('post'));
     }
 
 }

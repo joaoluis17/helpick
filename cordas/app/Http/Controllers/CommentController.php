@@ -8,18 +8,27 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, Post $post)
+    public function store(Request $request)
     {
+        // Confirme se o conteúdo está realmente chegando
+        if (!$request->has('content') || empty($request->content)) {
+            // Mensagem de log para identificar o problema
+            \Log::error('Conteúdo do comentário está vazio ou nulo');
+        }
+
+
         $request->validate([
-            'content' => 'required|string|max:500',
+            'content' => 'required|string',
         ]);
 
-        $comment = new Comment();
-        $comment->content = $request->content;
-        $comment->post_id = $post->id;
-        $comment->user_id = auth()->id(); // Assumindo que o usuário está autenticado
-        $comment->save();
+        Comment::create([
+            'content' => $request->content ?? 'Valor padrão de teste',
+            'post_id' => $request->post_id,
+            'user_id' => auth()->id(),
+        ]);
 
-        return redirect()->back()->with('success', 'Comentário adicionado com sucesso!');
+
+        return redirect()->route('posts.show', $request->post_id)->with('success', 'Comentário adicionado com sucesso!');
     }
+
 }

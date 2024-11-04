@@ -38,10 +38,10 @@ Route::middleware('auth')->group(function () {
 Route::get('/forum', [PostController::class, 'index'])->name('forum'); // Rota para o fórum
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store'); // Rota para criar posts
 Route::resource('posts', PostController::class);
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 Route::middleware('auth')->group(function () {
-    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::post('/comments/{post}', [CommentController::class, 'store'])->name('comments.store');
 });
-
 
 require __DIR__.'/auth.php';

@@ -35,7 +35,9 @@
                     <ul class="space-y-4">
                         @foreach ($posts as $post)
                             <li class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                                <h4 class="text-lg font-semibold text-gray-800">{{ $post->title }}</h4>
+                                <h4 class="text-lg font-semibold text-gray-800">
+                                    <a href="{{ route('posts.show', $post->id) }}" class="hover:underline">{{ $post->title }}</a>
+                                </h4>
                                 <p class="mt-2 text-gray-600">{{ $post->content }}</p> <!-- Exibe o conteúdo do post -->
 
                                 <!-- Exibir Comentários -->
@@ -46,16 +48,6 @@
                                     @endforeach
                                 </ul>
 
-                                <!-- Formulário para adicionar um novo comentário -->
-                                <form action="{{ route('comments.store', $post->id) }}" method="POST" class="mt-4">
-                                    @csrf
-                                    <label>
-                                        <textarea name="content" rows="2" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
-                                    </label>
-                                    <button type="submit" class="bg-skin-color text-brown-eyes font-semibold py-2 px-4 rounded border-2 border-gray-300 mt-2">
-                                        Adicionar Comentário
-                                    </button>
-                                </form>
                             </li>
                         @endforeach
                     </ul>

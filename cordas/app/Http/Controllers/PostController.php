@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -14,25 +13,16 @@ class PostController extends Controller
         return view('forum', compact('posts'));
     }
 
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(StorePostRequest $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'user_id' => 'nullable|exists:users,id', // Permite que seja nulo temporariamente
-        ]);
+        $validated = $request->validated();
 
         // Cria um novo post
-        $post = new Post();
-        $post->title = $validatedData['title'];
-        $post->content = $validatedData['content'];
-
-        // Somente atribui user_id se ele estiver presente
-        if (isset($validatedData['user_id'])) {
-            $post->user_id = $validatedData['user_id'];
-        }
-
-        $post->save();
+        $post = Post::create([
+            'title' =>  $validated['title'],
+            'content' => $validated['content'],
+            'user_id' => auth()->user()->id,
+        ]);
 
         return redirect()->route('posts.show', $post->id)->with('success', 'Post criado com sucesso!');
     }

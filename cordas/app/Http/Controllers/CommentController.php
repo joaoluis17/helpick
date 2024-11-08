@@ -2,33 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCommentRequest;
 use App\Models\Comment;
-use App\Models\Post;
-use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreCommentRequest $request)
     {
-        // Confirme se o conteúdo está realmente chegando
-        if (!$request->has('content') || empty($request->content)) {
-            // Mensagem de log para identificar o problema
-            \Log::error('Conteúdo do comentário está vazio ou nulo');
-        }
-
-
-        $request->validate([
-            'content' => 'required|string',
-        ]);
-
+        $validated = $request->validated();
         Comment::create([
-            'content' => $request->content ?? 'Valor padrão de teste',
-            'post_id' => $request->post_id,
-            'user_id' => auth()->id(),
+            'content' => $validated['content'],
+            'post_id' => $validated['post_id'],
+            'user_id' => auth()->user()->id,
         ]);
 
 
-        return redirect()->route('posts.show', $request->post_id)->with('success', 'Comentário adicionado com sucesso!');
+        return redirect()->route('posts.show', $validated['post_id'])->with('success', 'Comentário adicionado com sucesso!');
     }
 
 }

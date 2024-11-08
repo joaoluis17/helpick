@@ -10,8 +10,6 @@ class Post extends Model
     use HasFactory;
 
     protected $table = 'posts';
-
-
     /**
      * @var false|mixed|resource|string|null
      */
@@ -36,14 +34,4 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        $this->title = ''; // Inicializando com uma string vazia
-        $this->content = ''; // Inicializando com uma string vazia
-        $this->user_id = null; // Inicializando como nulo
-    }
-
-
 }

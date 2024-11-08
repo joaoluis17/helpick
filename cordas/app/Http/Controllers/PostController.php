@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'desc')->limit(5)->get();
         return view('forum', compact('posts'));
     }
 
@@ -30,7 +30,7 @@ class PostController extends Controller
     public function show($id)
     {
         // Busca o post pelo ID junto com os comentários
-        $post = Post::with('comments.user')->findOrFail($id);
+        $post = Post::findOrFail($id);
 
         // Retorna a view com o post e seus comentários
         return view('posts.show', compact('post'));

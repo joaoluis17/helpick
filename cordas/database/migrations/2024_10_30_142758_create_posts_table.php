@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Cria uma coluna `id` auto-incremental
             $table->string('title'); // Cria uma coluna `title`
             $table->text('content'); // Cria uma coluna `content`
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Adiciona a coluna `user_id` como chave estrangeira
+            $table->foreignId('user_id')->constrained(); // Adiciona a coluna `user_id` como chave estrangeira
             $table->timestamps(); // Cria as colunas `created_at` e `updated_at`
         });
     }

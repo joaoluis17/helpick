@@ -9,7 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h3 class="text-lg font-semibold text-gray-800 mb-4">Aqui você encontra as melhores promoções no mundo musical!</h3>
 
-            <div class="bg-white p-6 shadow rounded">
+            <div class="bg-off-white p-6 shadow rounded">
+                <a href="{{ route('products.create')}}" class="bg-skin-color text-brown-eyes font-semibold py-2 px-4 rounded border-2 border-gray-300 hover:bg-off-white">Adicionar Produto</a>
                 @if(session('success'))
                     <div class="mb-4 text-green-600">
                         {{ session('success') }}

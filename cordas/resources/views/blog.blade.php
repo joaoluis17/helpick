@@ -53,7 +53,7 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="bg-skin-color text-brown-eyes font-semibold py-2 px-4 rounded border-2 border-gray-300">Enviar</button>
+                    <button type="submit" class="bg-skin-color text-brown-eyes font-semibold py-2 px-4 rounded border-2 border-gray-300 hover:bg-off-white">Enviar</button>
                 </div>
             </form>
         </div>

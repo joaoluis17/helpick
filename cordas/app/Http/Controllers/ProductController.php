@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;  
+use Illuminate\Routing\Controller;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth'); 
+        $this->middleware('auth');
     }
 
     public function index()

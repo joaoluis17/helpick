@@ -33,7 +33,7 @@
                             <label for="content" class="block text-sm font-medium text-gray-700">Conteúdo:</label>
                             <textarea id="content" name="content" value="{{ old('content') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
                         </div>
-                        <button type="submit" class="bg-skin-color text-brown-eyes font-semibold py-2 px-4 rounded border-2 border-gray-300">
+                        <button type="submit" class="bg-skin-color text-brown-eyes font-semibold py-2 px-4 rounded border-2 border-gray-300 hover:bg-off-white">
                             Enviar
                         </button>
                     </form>

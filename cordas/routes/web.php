@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProductController;
+
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -26,9 +28,11 @@ Route::get('/forum', function () {
 Route::get('/blog', [JobController::class, 'index'])->middleware(['auth', 'verified'])->name('blog');
 Route::post('/blog', [JobController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.store');
 
-Route::get('/produtos', function () {
-    return view('products');
-})->middleware(['auth', 'verified'])->name('products');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/produtos', [ProductController::class, 'index'])->name('products');
+    Route::get('/produtos/criar', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/produtos', [ProductController::class, 'store'])->name('products.store');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

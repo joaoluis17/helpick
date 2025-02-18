@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +22,9 @@ Route::get('/forum', function () {
     return view('forum');
 })->middleware(['auth', 'verified'])->name('forum');
 
-Route::get('/blog', function () {
-    return view('blog');
-})->middleware(['auth', 'verified'])->name('blog');
+
+Route::get('/blog', [JobController::class, 'index'])->middleware(['auth', 'verified'])->name('blog');
+Route::post('/blog', [JobController::class, 'store'])->middleware(['auth', 'verified'])->name('blog.store');
 
 Route::get('/produtos', function () {
     return view('products');

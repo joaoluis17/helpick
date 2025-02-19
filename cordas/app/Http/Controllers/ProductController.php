@@ -52,5 +52,43 @@ class ProductController extends Controller
 
         return redirect()->route('products')->with('success', 'Produto cadastrado com sucesso!');
     }
+    
+    public function edit(Product $product)
+    {
+        return view('products.edit', compact('product'));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|string', // Aceita o formato como string
+            'description' => 'nullable|string',
+            'url' => 'nullable|url',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        // Remove formatação do preço (caso tenha R$, pontos ou vírgulas)
+        $validated['price'] = str_replace(['R$', '.', ','], ['', '', '.'], $validated['price']);
+
+        // Se houver uma nova imagem, faça o upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        $product->update($validated);
+
+        return redirect()->route('products')->with('success', 'Produto atualizado com sucesso!');
+    }
+
+
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('products')->with('success', 'Produto excluído com sucesso!');
+    }
+
 
 }

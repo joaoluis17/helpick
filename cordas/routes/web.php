@@ -32,7 +32,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/produtos', [ProductController::class, 'index'])->name('products');
     Route::get('/produtos/criar', [ProductController::class, 'create'])->name('products.create');
     Route::post('/produtos', [ProductController::class, 'store'])->name('products.store');
+    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
 });
+
+Route::resource('products', ProductController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

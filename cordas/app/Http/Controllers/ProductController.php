@@ -26,20 +26,23 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // Validação dos dados
         $request->validate([
             'name' => 'required|string|max:255',
+            'price' => 'required|string', 
             'description' => 'required|string',
             'url' => 'required|url',
             'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Salvando o produto
+        $price = preg_replace('/[^0-9,]/', '', $request->price); 
+        $price = str_replace(',', '.', $price); 
+
         $product = new Product();
         $product->name = $request->name;
+        $product->price = number_format((float) $price, 2, '.', '');
         $product->description = $request->description;
         $product->url = $request->url;
-        
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
             $product->image = $imagePath;
@@ -47,6 +50,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index')->with('success', 'Produto cadastrado com sucesso!');
+        return redirect()->route('products')->with('success', 'Produto cadastrado com sucesso!');
     }
+
 }
